@@ -14,9 +14,9 @@
                 <h2>{{ note.title }} <img src="{{ note.image_url}}" /></h2>
 
                 <div class="right">
-                    <a class="button details" href="/datail/2/">Details</a>
-                    <a class="button edit" href="/edit/2/">Edit</a>
-                    <a class="button delete" href="/delete/2/">Delete</a>
+                    <a class="button details" href="{% url 'note_detail' note.pk %}">Details</a>
+                    <a class="button edit" href="{% url 'note_update' note.pk %}">Edit</a>
+                    <a class="button delete" href="{% url 'note_delete' note.pk %}">Delete</a>
                 </div>
             </div>
 

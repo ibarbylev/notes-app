@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView, DeleteView, DetailView
 
 from notes.forms import NoteForm, ProfileForm
 from notes.models import Profile, Note
@@ -46,4 +48,32 @@ def create_note_view(request, **kwargs):
     context = {'form': NoteForm()}
     return render(request, 'note-create.html', context)
 
+
+class NoteUpdateView(UpdateView):
+    model = Note
+    fields = ['title',  'image_url', 'content']
+    template_name = 'note-edit.html'
+    success_url = reverse_lazy('index')
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # context['title'] = 'Edit page'
+    #     note = context['note']
+    #     # context['heading_text'] = f'Creating of {note.doc_name}'
+    #     # context['description'] = f'On this page you can update the document {note.doc_name}.'
+    #     return context
+
+
+class NoteDeleteView(DeleteView):
+    model = Note
+    fields = ['title',  'image_url', 'content']
+    template_name = 'note-delete.html'
+    success_url = reverse_lazy('index')
+
+
+class NoteDetailView(DetailView):
+    model = Note
+    fields = ['title',  'image_url', 'content']
+    template_name = 'note-details.html'
+    success_url = reverse_lazy('index')
 
