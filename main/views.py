@@ -77,3 +77,18 @@ class NoteDetailView(DetailView):
     template_name = 'note-details.html'
     success_url = reverse_lazy('index')
 
+
+def redirect_to_profile(request):
+    pk = Profile.objects.last().pk
+    return redirect(f'/profiles/{pk}')
+
+
+class ProfileDeleteView(DeleteView):
+    model = Profile
+    template_name = 'profile.html'
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['notes_len'] = len(Note.objects.all())
+        return context
