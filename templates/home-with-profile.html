@@ -1,0 +1,27 @@
+{% extends 'base-page.html' %}
+{% load static %}
+
+{% block container %}
+
+        <h1> My Notes </h1>
+
+    {% if not is_notes %}
+        <h2>There are no notes.</h2>
+        <!--notes container-->
+    {% else %}
+        {% for note in notes %}
+            <div class="note-container">
+                <h2>{{ note.title }} <img src="{{ note.image_url}}" /></h2>
+
+                <div class="right">
+                    <a class="button details" href="/datail/2/">Details</a>
+                    <a class="button edit" href="/edit/2/">Edit</a>
+                    <a class="button delete" href="/delete/2/">Delete</a>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock container %}
